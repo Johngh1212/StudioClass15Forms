@@ -1,0 +1,65 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Search Engine Selector</title>
+    <script>
+        // Create event handler 
+        function setSearchEngine(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            let form = event.target; // Get the form element
+            let selectedEngine = form.elements.engine.value; // Retrieve the selected search engine value
+
+            // Determine the action URL based on the selected search engine
+            let actionUrl;
+
+            if (selectedEngine === 'google') {
+                actionUrl = 'https://www.google.com/search';
+            } else if (selectedEngine === 'duckDuckGo') {
+                actionUrl = 'https://duckduckgo.com/';
+            } else if (selectedEngine === 'bing') {
+                actionUrl = 'https://www.bing.com/search';
+            } else if (selectedEngine === 'ask') {
+                actionUrl = 'https://www.ask.com/web';
+            } else {
+                // Default to Google
+                actionUrl = 'https://www.google.com/search';
+            }
+
+            // Set the form's action attribute
+            form.action = actionUrl;
+        }
+
+        window.addEventListener('load', function() { //Evene Listener
+            const form = document.getElementById('searchForm');
+            form.addEventListener('submit', setSearchEngine); // Register the handler
+        });
+    </script>
+</head>
+<body>
+    <form id="searchForm">
+        <!-- Text input for search query -->
+        <input type="text" name="q" placeholder="Enter your search query" required>
+        
+        <!-- Radio button for Google.com search engine -->
+        <input type="radio" id="google" name="engine" value="google"> 
+        <label for="google">Google</label>
+        
+		<!-- Radio button for Duckduckgo.com search engine -->
+        <input type="radio" id="duckDuckGo" name="engine" value="duckDuckGo">
+        <label for="duckDuckGo">DuckDuckGo</label>
+        
+		<!-- Radio button for Bing.com search engine -->
+        <input type="radio" id="bing" name="engine" value="bing">
+        <label for="bing">Bing</label>
+        
+		<!-- Radio button for Ask.com search engine -->
+        <input type="radio" id="ask" name="engine" value="ask">
+        <label for="ask">Ask</label>
+        
+        <!-- Submit button -->
+        <button type="submit">Go!</button>
+    </form>
+</body>
+</html>
